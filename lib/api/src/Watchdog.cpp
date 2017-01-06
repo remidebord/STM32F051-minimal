@@ -35,7 +35,7 @@ Watchdog :: Watchdog(uint32_t ms)
 	// Wait reload value flag
 	while((IWDG->SR & IWDG_SR_RVU) == 0);
 	
-	// Enable watchdog (disable watchdog registers write access)
+	// Enable watchdog (Force LSI clock ON)
 	IWDG->KR = IWDG_KR_ENABLE;
 	
 	// Reload watchdog counter

@@ -16,23 +16,37 @@ class AnalogIn : public GPIO
 	private:
 		
 		uint8_t m_channel;
-	
-	public:
 		
 		static __IO uint8_t m_channels;
 		static __IO uint8_t m_rank[ADC_CHANNELS_MAX];
 		static __IO uint16_t m_value[ADC_CHANNELS_MAX];
+		
+		static void adc(void);
+		static void dma(void);
+		static void sort(uint8_t* buffer, uint8_t size);
+		static uint8_t channel(PinName pin);
+	
+	public:
 	
 		AnalogIn(PinName pin);
 	
-		static void adc(void);
-		static void dma(void);
-		static uint8_t channel(PinName pin);
-		static void sort(uint8_t* buffer, uint8_t size);
+		uint16_t read_b();
+		uint16_t read();
+		operator uint16_t();	// Read (shorthand)
+};
+
+class AnalogOut : public GPIO
+{
+	private:
 	
-		uint16_t read_b();											// Read (conversion)
-		uint16_t read();												// Read (no conversion)
-		operator uint16_t();										// Read (no conversion)
+	public:
+	
+		AnalogOut(PinName pin);
+	
+		void write(uint16_t value);
+		uint16_t read(void);
+		AnalogOut& operator= (uint16_t value);	// Write (shorthand)
+		operator uint16_t();					// Read (shorthand)
 };
 
 #endif

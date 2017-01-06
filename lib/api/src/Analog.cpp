@@ -42,6 +42,9 @@ AnalogIn :: AnalogIn(PinName pin) : GPIO(pin, PIN_AN)
 	// ADC configuration needed ?
 	if(ADC1->CFGR1 == 0)
 	{
+		// DMA access: disable
+		ADC1->CFGR1 &= (uint32_t)(~ADC_CFGR1_DMAEN);
+	
 		AnalogIn::adc();
 		
 		// Initialize rank array
@@ -77,12 +80,23 @@ AnalogIn :: AnalogIn(PinName pin) : GPIO(pin, PIN_AN)
 }
 
 void AnalogIn :: adc(void)
-{
-	// DMA access: disable
-	ADC1->CFGR1 &= (uint32_t)(~ADC_CFGR1_DMAEN);
-	
+{	
 	// Enable ADC1 clock
 	RCC->APB2ENR |= RCC_APB2ENR_ADC1EN;
+	
+	// Enable ADC1 HSI14 clock (14MHz)
+	RCC->CR2 |= RCC_CR2_HSI14ON;
+	
+	// Wait HSI14
+	while((RCC->CR2 & RCC_CR2_HSI14RDY) == 0);
+	
+	// ADC clock mode: HSI14
+	ADC1->CFGR2 = 0;
+	
+	// Sampling time configuration (239.5 ADC clock cycles)
+	ADC1->SMPR |= ADC_SMPR1_SMPR;
+	
+	// Conversion time = (239.5 + 12.5) x (1 / 14MHz) = 18us
 	
 	// Clear configuration register 1
 	ADC1->CFGR1 = 0;
@@ -107,9 +121,6 @@ void AnalogIn :: adc(void)
 	
 	// DMA access: enable
 	ADC1->CFGR1 |= ADC_CFGR1_DMAEN;
-	
-	// TODO: clock and sampling time configuration
-	ADC1->SMPR |= ADC_SMPR1_SMPR;
 }
 
 void AnalogIn :: dma(void)
@@ -204,3 +215,38 @@ AnalogIn :: operator uint16_t()
 {
 	return m_value[m_rank[m_channel]];
 }
+
+/////////////////////
+
+AnalogOut :: AnalogOut(PinName pin) : GPIO(pin, PIN_AN)
+{
+	this->pull(PullNone);
+
+	// Enable DAC clock
+	RCC->APB1ENR |= RCC_APB1ENR_DACEN;
+	
+	// Enable DAC channel 1
+	DAC->CR |= DAC_CR_EN1;
+}
+
+void AnalogOut :: write(uint16_t value)
+{
+	DAC->DHR12R1 = value;;
+}
+
+AnalogOut& AnalogOut ::  operator= (uint16_t value)
+{
+	DAC->DHR12R1 = value;
+	return *this;
+}
+
+uint16_t AnalogOut :: read()
+{
+	return DAC->DOR1;
+}
+
+AnalogOut :: operator uint16_t()
+{
+	return DAC->DOR1;
+}
+
