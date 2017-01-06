@@ -459,6 +459,16 @@
               <FileType>8</FileType>
               <FilePath>.\lib\api\src\Memory.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Watchdog.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\lib\api\src\Watchdog.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Analog.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\lib\api\src\Analog.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

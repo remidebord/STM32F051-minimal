@@ -17,11 +17,14 @@ GPIO :: GPIO(PinName pin, PinMode mode)
 	m_pin = (uint8_t)pin;
 	m_mask = ((uint32_t)0x01 << m_pin);
 	
-  /* GPIOx Periph clock enable */
-	clock_enable((uint32_t) m_port);
-	
-  /* Configure pin in output */
-	this->mode(mode);
+	if(pin != NC)
+	{
+		/* GPIOx Periph clock enable */
+		clock_enable((uint32_t) m_port);
+		
+		/* Configure pin in output */
+		this->mode(mode);
+	}
 }
 
 void GPIO :: clock_enable(uint32_t port)
