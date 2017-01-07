@@ -17,7 +17,7 @@
 
 Power :: Power(void)
 {
-  // Enable PWR clock
+	// Enable PWR clock
 	RCC->APB1ENR |= RCC_APB1ENR_PWREN;
 }
 
