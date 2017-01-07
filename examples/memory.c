@@ -13,17 +13,17 @@ int main(void)
 {	
 	uint16_t i = 0;
 	
-  while (1)
-  {
+	while (1)
+	{
 		led1 = !led1;
 		Delay(100);
 		
- 		if(pushButton)
+		if(pushButton)
 		{
 			led2 = 1;
 			memory.write(i, text, sizeof(text)); 
 			i+=sizeof(text);
 		}
- 		else led2 = 0;
-  }
+		else led2 = 0;
+	}
 }

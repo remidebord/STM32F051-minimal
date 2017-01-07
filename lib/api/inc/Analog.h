@@ -6,8 +6,8 @@
 
 /* defines ----------------------------------------------------------------- */
 #define ADC_CHANNELS_MAX 19
-#define ADC_CHANNEL_GPIOA_OFFSET 0 	/* IN[0:7] */
-#define ADC_CHANNEL_GPIOB_OFFSET 8 	/* IN[8:9] */
+#define ADC_CHANNEL_GPIOA_OFFSET 0  /* IN[0:7] */
+#define ADC_CHANNEL_GPIOB_OFFSET 8  /* IN[8:9] */
 #define ADC_CHANNEL_GPIOC_OFFSET 10 /* IN[10:15] */
 
 /* class ------------------------------------------------------------------- */
@@ -45,8 +45,8 @@ class AnalogOut : public GPIO
 	
 		void write(uint16_t value);
 		uint16_t read(void);
-		AnalogOut& operator= (uint16_t value);	// Write (shorthand)
-		operator uint16_t();					// Read (shorthand)
+		AnalogOut& operator= (uint16_t value);  // Write (shorthand)
+		operator uint16_t();                    // Read (shorthand)
 };
 
 #endif

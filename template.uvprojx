@@ -465,6 +465,11 @@
               <FilePath>.\lib\api\src\Memory.cpp</FilePath>
             </File>
             <File>
+              <FileName>Power.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\lib\api\src\Power.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Watchdog.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\lib\api\src\Watchdog.cpp</FilePath>

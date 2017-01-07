@@ -3,20 +3,10 @@
 Power power;
 
 DigitalOut led1(PC_9);
-DigitalOut led2(PC_8);
-
-InterruptIn button(PA_0);
-
-void toggle(void)
-{
-	led2 = !led2;
-}
 
 int main(void)
 {
 	uint8_t i = 0;
-	
-	button.rise(&toggle);
 	
 	while (1)
 	{				
@@ -26,8 +16,8 @@ int main(void)
 			i = 0;
 			led1 = 0;
 			
-			// Go to stop mode (Wakeup: any EXTI line)
-			power.stop();
+			// Go to standby mode (Wakeup pin: PA_0)
+			power.standby(PA_0);
 		}
 		
 		led1 = !led1;

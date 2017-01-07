@@ -19,10 +19,10 @@ GPIO :: GPIO(PinName pin, PinMode mode)
 	
 	if(pin != NC)
 	{
-		/* GPIOx Periph clock enable */
+		// GPIO clock enable
 		clock_enable((uint32_t) m_port);
 		
-		/* Configure pin in output */
+		// Configure pin in output
 		this->mode(mode);
 	}
 }

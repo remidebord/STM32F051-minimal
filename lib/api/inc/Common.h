@@ -76,10 +76,10 @@ typedef enum {
 } PinName;
 
 typedef enum {
-	PIN_INPUT	 = 0x00,
+	PIN_INPUT  = 0x00,
 	PIN_OUTPUT = 0x01,
-	PIN_AF		 = 0x02,
-	PIN_AN		 = 0x03
+	PIN_AF     = 0x02,
+	PIN_AN     = 0x03
 } PinMode;
 
 typedef enum {
@@ -88,16 +88,16 @@ typedef enum {
 } PinType;
 
 typedef enum {
-	PullNone  = 0x00,
-	PullUp    = 0x01,
-	PullDown  = 0x02,
+	PullNone    = 0x00,
+	PullUp      = 0x01,
+	PullDown    = 0x02,
 	PullDefault = PullNone
 } PinPull;
 
 typedef enum {
-	SpeedLow 		= 0x00,
+	SpeedLow    = 0x00,
 	SpeedMedium = 0x01,
-	SpeedHigh 	= 0x03
+	SpeedHigh   = 0x03
 } PinSpeed;
 
 #endif

@@ -49,34 +49,34 @@ InterruptIn :: InterruptIn(PinName pin) : GPIO(pin, PIN_INPUT)
 	
 	this->pull(PullNone);
 	
-	/* Enable SYSCFG clock */
-  RCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN;
+	// Enable SYSCFG clock
+	RCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN;
 	
 	port  = ((((uint32_t)m_port) - AHB2PERIPH_BASE) >> 10);
 	shift = (0x04 * (m_pin & 0x03));
 	index = m_pin >> 0x02;
 	
-	/* SYSCFG external interrupt configuration*/
+	// SYSCFG external interrupt configuration
 	SYSCFG->EXTICR[index] &= ~(0x0F << shift);
 	SYSCFG->EXTICR[index] |= (port << shift);
 	
-	/* Clear EXTI line configuration */
+	// Clear EXTI line configuration
 	EXTI->IMR &= ~m_mask;
 	EXTI->EMR &= ~m_mask;
 	
-	/* Select interrupt mode */
+	// Select interrupt mode
 	EXTI->IMR |= m_mask;
 	
-	/* Clear Rising Falling edge configuration */
+	// Clear Rising Falling edge configuration
 	EXTI->RTSR &= ~m_mask;
 	EXTI->FTSR &= ~m_mask;
 	
-	/* NVIC configuration */
+	// NVIC configuration
 	if(m_pin <= 1) irq = EXTI0_1_IRQn;
 	else if (m_pin <= 3) irq = EXTI2_3_IRQn;
 	else irq = EXTI4_15_IRQn;
 	
-	NVIC_SetPriority(irq, 1); /* High: 0, Low: 3 */
+	NVIC_SetPriority(irq, 1); // High: 0, Low: 3
 	NVIC_EnableIRQ(irq);
 }
 
@@ -113,13 +113,13 @@ extern "C"
 		{
 			extiLine = ((uint32_t)0x01 << i);
 			
-			/* Check pending register */
+			// Check pending register
 			if ((EXTI->PR & (extiLine)) != 0)
 			{
-				/* Callback ? */
+				// Callback ?
 				if(extiCallback[i] != 0) (*extiCallback[i])();
 				
-				/* Clear bit */
+				// Clear bit
 				EXTI->PR = extiLine;
 			}			
 		}
@@ -134,13 +134,13 @@ extern "C"
 		{
 			extiLine = ((uint32_t)0x01 << i);
 			
-			/* Check pending register */
+			// Check pending register
 			if ((EXTI->PR & (extiLine)) != 0)
 			{				
-				/* Callback ? */
+				// Callback ?
 				if(extiCallback[i] != 0) (*extiCallback[i])();
 				
-				/* Clear bit */
+				// Clear bit
 				EXTI->PR = extiLine;
 			}			
 		}
@@ -155,13 +155,13 @@ extern "C"
 		{
 			extiLine = ((uint32_t)0x01 << i);
 			
-			/* Check pending register */
+			// Check pending register
 			if ((EXTI->PR & (extiLine)) != 0)
 			{				
-				/* Callback ? */
+				// Callback ?
 				if(extiCallback[i] != 0) (*extiCallback[i])();
 				
-				/* Clear bit */
+				// Clear bit
 				EXTI->PR = extiLine;
 			}			
 		}

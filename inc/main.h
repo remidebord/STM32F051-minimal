@@ -10,6 +10,7 @@
 #include "Digital.h"
 #include "Delay.h"
 #include "Memory.h"
+#include "Power.h"
 #include "Watchdog.h"
 
 /* defines --------------------------------------------------------------------*/

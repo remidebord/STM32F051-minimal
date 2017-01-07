@@ -14,13 +14,13 @@ int main(void)
 {
 	uint8_t i;
 	
-  while (1)
-  {
+	while (1)
+	{
 		for(i = 0; i < 32; i++)
 		{
 			aout = Sine12bit[i];
 			value = ain.read_b();
 			Delay(1000);
 		}
-  }
+	}
 }

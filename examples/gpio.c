@@ -13,8 +13,6 @@ void Push(void)
 
 int main(void)
 {
-	Systick_Init();
-	
 	pushButton.rise(&Push);
 	
 	while (1)
