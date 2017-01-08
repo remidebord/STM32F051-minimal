@@ -18,16 +18,16 @@ GPIO :: GPIO(PinName pin, PinMode mode)
 	m_mask = ((uint32_t)0x01 << m_pin);
 	
 	if(pin != NC)
-	{
+	{		
 		// GPIO clock enable
-		clock_enable((uint32_t) m_port);
+		clock((uint32_t) m_port);
 		
 		// Configure pin in output
 		this->mode(mode);
 	}
 }
 
-void GPIO :: clock_enable(uint32_t port)
+void GPIO :: clock(uint32_t port)
 {
 	uint32_t tmp = 0;
 	
@@ -66,6 +66,30 @@ void GPIO :: speed(PinSpeed speed)
 {
 	m_port->OSPEEDR &= ~(GPIO_OSPEEDER_OSPEEDR0 << (m_pin * 2));
 	m_port->OSPEEDR |= ((uint32_t)(speed) << (m_pin * 2));
+}
+
+void GPIO :: af(PinAF f)
+{
+	uint8_t shift = (0x04 * (m_pin & 0x07));
+	uint8_t index = m_pin >> 0x03;
+	
+	m_port->AFR[index] &= ~(GPIO_AFRL_AFRL0 << shift);
+	m_port->AFR[index] |= (uint32_t)f << shift;
+}
+
+uint32_t GPIO :: port(void)
+{
+	return (uint32_t)m_port;
+}
+
+uint32_t GPIO :: mask(void)
+{
+	return m_mask;
+}
+
+uint8_t GPIO :: pin(void)
+{
+	return m_pin;
 }
 
 void GPIO :: write(uint32_t value)

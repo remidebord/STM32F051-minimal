@@ -440,6 +440,11 @@
               <FilePath>.\lib\api\src\Common.c</FilePath>
             </File>
             <File>
+              <FileName>CircularBuffer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\lib\api\src\CircularBuffer.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Delay.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\lib\api\src\Delay.c</FilePath>
@@ -458,6 +463,11 @@
               <FileName>Analog.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\lib\api\src\Analog.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Serial.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\lib\api\src\Serial.cpp</FilePath>
             </File>
             <File>
               <FileName>Memory.cpp</FileName>

@@ -76,28 +76,45 @@ typedef enum {
 } PinName;
 
 typedef enum {
-	PIN_INPUT  = 0x00,
-	PIN_OUTPUT = 0x01,
-	PIN_AF     = 0x02,
-	PIN_AN     = 0x03
+	Pin_Input  = 0x00,
+	Pin_Output = 0x01,
+	Pin_AF     = 0x02,
+	Pin_AN     = 0x03
 } PinMode;
 
 typedef enum {
-	PushPull  = 0x00,
-	OpenDrain = 0x01
+	Push_Pull  = 0x00,
+	Open_Drain = 0x01
 } PinType;
 
 typedef enum {
-	PullNone    = 0x00,
-	PullUp      = 0x01,
-	PullDown    = 0x02,
-	PullDefault = PullNone
+	Pull_None    = 0x00,
+	Pull_Up      = 0x01,
+	Pull_Down    = 0x02,
+	Pull_Default = Pull_None
 } PinPull;
 
 typedef enum {
-	SpeedLow    = 0x00,
-	SpeedMedium = 0x01,
-	SpeedHigh   = 0x03
+	Speed_Low    = 0x00,
+	Speed_Medium = 0x01,
+	Speed_High   = 0x03
 } PinSpeed;
+
+typedef enum {
+	AF_0 = 0x00, // WKUP, EVENTOUT, TIM15, SPI1, TIM17, MCO, SWDAT, SWCLK, TIM14, BOOT, USART1, CEC, IR_OUT, SPI2
+	AF_1 = 0x01, // USART2, CEC, TIM3, USART1, USART2, EVENTOUT, I2C1, I2C2, TIM15
+	AF_2 = 0x02, // TIM2, TIM1, EVENTOUT, TIM16, TIM17
+	AF_3 = 0x03, // TS, I2C1, TIM15, EVENTOUT
+	AF_4 = 0x04, // TIM14
+	AF_5 = 0x05, // TIM16, TIM17
+	AF_6 = 0x06, // EVENTOUT
+	AF_7 = 0x07  // COMP1 OUT, COMP2 OUT
+} PinAF;
+
+typedef enum {
+	None = 0x00,
+	Even = 0x02,
+	Odd  = 0x03
+} Parity;
 
 #endif

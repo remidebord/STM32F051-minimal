@@ -6,9 +6,10 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "Analog.h"
-#include "Digital.h"
 #include "Delay.h"
+#include "Digital.h"
+#include "Analog.h"
+#include "Serial.h"
 #include "Memory.h"
 #include "Power.h"
 #include "Watchdog.h"

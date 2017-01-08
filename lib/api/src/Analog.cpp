@@ -15,11 +15,11 @@ __IO uint8_t AnalogIn::m_channels = 0;
 __IO uint8_t AnalogIn::m_rank[ADC_CHANNELS_MAX] = {0};
 __IO uint16_t AnalogIn::m_value[ADC_CHANNELS_MAX] = {0};
 
-AnalogIn :: AnalogIn(PinName pin) : GPIO(pin, PIN_AN)
+AnalogIn :: AnalogIn(PinName pin) : GPIO(pin, Pin_AN)
 {
 	uint8_t i = 0;
 	
-	this->pull(PullNone);
+	this->pull(Pull_None);
 	
 	if((ADC1->CR & ADC_CR_ADSTART) != 0)
 	{
@@ -84,19 +84,13 @@ void AnalogIn :: adc(void)
 	// Enable ADC1 clock
 	RCC->APB2ENR |= RCC_APB2ENR_ADC1EN;
 	
-	// Enable ADC1 HSI14 clock (14MHz)
-	RCC->CR2 |= RCC_CR2_HSI14ON;
-	
-	// Wait HSI14
-	while((RCC->CR2 & RCC_CR2_HSI14RDY) == 0);
-	
-	// ADC clock mode: HSI14
-	ADC1->CFGR2 = 0;
+	// ADC clock mode: PCLK/2 = 48MHz/2
+	ADC1->CFGR2 = ADC_CFGR2_JITOFFDIV2;
 	
 	// Sampling time configuration (239.5 ADC clock cycles)
 	ADC1->SMPR |= ADC_SMPR1_SMPR;
 	
-	// Conversion time = (239.5 + 12.5) x (1 / 14MHz) = 18us
+	// Conversion time = (239.5 + 12.5) x (1 / 24MHz) = 10us
 	
 	// Clear configuration register 1
 	ADC1->CFGR1 = 0;
@@ -218,9 +212,9 @@ AnalogIn :: operator uint16_t()
 
 /////////////////////
 
-AnalogOut :: AnalogOut(PinName pin) : GPIO(pin, PIN_AN)
+AnalogOut :: AnalogOut(PinName pin) : GPIO(pin, Pin_AN)
 {
-	this->pull(PullNone);
+	this->pull(Pull_None);
 
 	// Enable DAC clock
 	RCC->APB1ENR |= RCC_APB1ENR_DACEN;

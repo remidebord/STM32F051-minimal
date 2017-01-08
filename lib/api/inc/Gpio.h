@@ -15,13 +15,18 @@ class GPIO
 	
 	public:
 		
-		static void clock_enable(uint32_t port);
+		static void clock(uint32_t port);
 	
 		GPIO(PinName pin, PinMode mode);
 		void mode(PinMode mode);
 		void type(PinType type);
 		void pull(PinPull pull);
 		void speed(PinSpeed speed);
+		void af(PinAF f);
+	
+		uint32_t port(void);
+		uint32_t mask(void);
+		uint8_t pin(void);
 	
 		void write(uint32_t value);
 		uint32_t read(void);

@@ -16,10 +16,10 @@ extern "C"
 	void (*extiCallback[16])(void);
 }
 
-DigitalOut :: DigitalOut(PinName pin) : GPIO(pin, PIN_OUTPUT)
+DigitalOut :: DigitalOut(PinName pin) : GPIO(pin, Pin_Output)
 {
-	this->type(PushPull);
-	this->pull(PullNone);
+	this->type(Push_Pull);
+	this->pull(Pull_None);
 	
 	this->write(0);
 }
@@ -32,14 +32,14 @@ DigitalOut& DigitalOut :: operator= (uint32_t value)
 
 /////////////////////
 
-DigitalIn :: DigitalIn(PinName pin) : GPIO(pin, PIN_INPUT)
+DigitalIn :: DigitalIn(PinName pin) : GPIO(pin, Pin_Input)
 {
-	this->pull(PullDown);
+	this->pull(Pull_Down);
 }
 
 /////////////////////
 
-InterruptIn :: InterruptIn(PinName pin) : GPIO(pin, PIN_INPUT)
+InterruptIn :: InterruptIn(PinName pin) : GPIO(pin, Pin_Input)
 {
 	uint32_t port = 0;
 	uint8_t shift = 0;
@@ -47,7 +47,7 @@ InterruptIn :: InterruptIn(PinName pin) : GPIO(pin, PIN_INPUT)
 	
 	IRQn_Type irq = EXTI0_1_IRQn;
 	
-	this->pull(PullNone);
+	this->pull(Pull_None);
 	
 	// Enable SYSCFG clock
 	RCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN;
