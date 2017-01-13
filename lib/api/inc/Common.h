@@ -117,4 +117,8 @@ typedef enum {
 	Odd  = 0x03
 } Parity;
 
+/* functions --------------------------------------------------------------- */
+uint8_t bcd2bin(uint8_t bcd);
+uint8_t bin2bcd(uint8_t bin);
+
 #endif
