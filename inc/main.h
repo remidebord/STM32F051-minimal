@@ -9,6 +9,7 @@
 #include "Delay.h"
 #include "Digital.h"
 #include "Analog.h"
+#include "Timer.h"
 #include "Serial.h"
 #include "Memory.h"
 #include "Power.h"
