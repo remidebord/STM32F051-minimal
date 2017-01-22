@@ -14,7 +14,7 @@ AnalogIn ain5(PB_0); // Channel 8
 
 int main(void)
 {	
-	while (1)
+	while(1)
 	{
 		value1 = ain1.read_b();
 		value2 = ain2.read_b();

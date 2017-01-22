@@ -566,10 +566,7 @@ typedef struct
   uint16_t      RESERVED4;       /*!< Reserved,                                                    0x12 */
   __IO uint16_t EGR;             /*!< TIM event generation register,               Address offset: 0x14 */
   uint16_t      RESERVED5;       /*!< Reserved,                                                    0x16 */
-  __IO uint16_t CCMR1;           /*!< TIM  capture/compare mode register 1,        Address offset: 0x18 */
-  uint16_t      RESERVED6;       /*!< Reserved,                                                    0x1A */
-  __IO uint16_t CCMR2;           /*!< TIM  capture/compare mode register 2,        Address offset: 0x1C */
-  uint16_t      RESERVED7;       /*!< Reserved,                                                    0x1E */
+  __IO uint32_t CCMR[2];         /*!< TIM  capture/compare mode register 1, 2      Address offset: 0x18 */
   __IO uint16_t CCER;            /*!< TIM capture/compare enable register,         Address offset: 0x20 */
   uint16_t      RESERVED8;       /*!< Reserved,                                                    0x22 */
   __IO uint32_t CNT;             /*!< TIM counter register,                        Address offset: 0x24 */
@@ -578,10 +575,7 @@ typedef struct
   __IO uint32_t ARR;             /*!< TIM auto-reload register,                    Address offset: 0x2C */
   __IO uint16_t RCR;             /*!< TIM  repetition counter register,            Address offset: 0x30 */
   uint16_t      RESERVED12;      /*!< Reserved,                                                    0x32 */
-  __IO uint32_t CCR1;            /*!< TIM capture/compare register 1,              Address offset: 0x34 */
-  __IO uint32_t CCR2;            /*!< TIM capture/compare register 2,              Address offset: 0x38 */
-  __IO uint32_t CCR3;            /*!< TIM capture/compare register 3,              Address offset: 0x3C */
-  __IO uint32_t CCR4;            /*!< TIM capture/compare register 4,              Address offset: 0x40 */
+  __IO uint32_t CCR[4];          /*!< TIM capture/compare register 1, 2, 3, 4      Address offset: 0x34 */
   __IO uint16_t BDTR;            /*!< TIM break and dead-time register,            Address offset: 0x44 */
   uint16_t      RESERVED17;      /*!< Reserved,                                                    0x26 */
   __IO uint16_t DCR;             /*!< TIM DMA control register,                    Address offset: 0x48 */

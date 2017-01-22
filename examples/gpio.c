@@ -15,7 +15,7 @@ int main(void)
 {
 	pushButton.rise(&Push);
 	
-	while (1)
+	while(1)
 	{
 		led1 = !led1;
 		Delay(100);

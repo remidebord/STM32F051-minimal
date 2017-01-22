@@ -8,7 +8,7 @@ int main(void)
 {
 	uint8_t i = 0;
 	
-	while (1)
+	while(1)
 	{				
 		// 5 sec ?
 		if(i >= 50)

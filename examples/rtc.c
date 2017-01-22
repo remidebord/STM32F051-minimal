@@ -30,7 +30,7 @@ int main(void)
 {
 	pushButton.rise(&Push);
 
-	while (1)
+	while(1)
 	{
 		clock.get(&time);
 		clock.get(&date);

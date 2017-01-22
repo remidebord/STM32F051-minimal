@@ -3,8 +3,12 @@
 
 /* includes ---------------------------------------------------------------- */
 #include "Common.h"
+#include "GPIO.h"
 
 /* defines ----------------------------------------------------------------- */
+#define PWMOUT_DUTYCYCLE_MAX 100 
+#define PWMOUT_LOW_FREQUENCY 800
+
 /* class ------------------------------------------------------------------- */
 class Timer
 {
@@ -48,6 +52,26 @@ class Timeout : public Timer
 		void attach_us(void(*f)(void), uint32_t us);
 		void detach(void);
 		void start(void);
+};
+
+class PwmOut : public GPIO, public Timer
+{
+	private:
+		
+		TIM_TypeDef* m_timer;
+	
+		uint32_t m_frequency;
+		uint8_t m_dutyCycle;
+		TimerChannel m_channel;
+	
+	public:
+		
+		PwmOut(PinName pin, uint32_t frequency, TIM_TypeDef* timer, TimerChannel channel);
+		void frequency(uint32_t value);     // Modify frequency
+		void write(uint8_t value);          // Write
+		PwmOut& operator= (uint8_t value);  // Write (shorthand)
+		uint8_t read();                     // Read
+		operator uint8_t();
 };
 
 #endif /* __TIMER_H */

@@ -13,7 +13,7 @@ int main(void)
 {	
 	uint16_t i = 0;
 	
-	while (1)
+	while(1)
 	{
 		led1 = !led1;
 		Delay(100);

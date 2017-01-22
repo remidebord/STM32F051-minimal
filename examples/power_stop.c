@@ -18,7 +18,7 @@ int main(void)
 	
 	button.rise(&toggle);
 	
-	while (1)
+	while(1)
 	{				
 		// 5 sec ?
 		if(i >= 50)

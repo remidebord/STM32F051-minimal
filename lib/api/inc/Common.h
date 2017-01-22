@@ -115,7 +115,14 @@ typedef enum {
 	None = 0x00,
 	Even = 0x02,
 	Odd  = 0x03
-} Parity;
+} SerialParity;
+
+typedef enum {
+	Channel_1 = 0x01,
+	Channel_2 = 0x02,
+	Channel_3 = 0x03,
+	Channel_4 = 0x04
+} TimerChannel;
 
 /* functions --------------------------------------------------------------- */
 uint8_t bcd2bin(uint8_t bcd);

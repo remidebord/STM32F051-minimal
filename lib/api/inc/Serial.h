@@ -35,7 +35,7 @@ class Serial
 		Serial(USART_TypeDef* usart, PinName rx, PinName tx, PinName de = NC);
 		
 		void baudrate(uint32_t value);
-		void format(uint8_t databits, Parity parity, uint8_t stopbits);
+		void format(uint8_t databits, SerialParity parity, uint8_t stopbits);
 		uint8_t write(uint8_t* buffer, uint16_t length);
 		uint16_t read(uint8_t* buffer);
 };

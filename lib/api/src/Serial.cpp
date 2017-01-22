@@ -128,7 +128,7 @@ void Serial :: baudrate(uint32_t value)
 	m_usart->CR1 |= USART_CR1_UE;
 }
 
-void Serial :: format(uint8_t databits, Parity parity, uint8_t stopbits)
+void Serial :: format(uint8_t databits, SerialParity parity, uint8_t stopbits)
 {
 	uint32_t tmp = 0;
 	
