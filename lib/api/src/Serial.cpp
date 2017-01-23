@@ -1,7 +1,7 @@
 /*!
  * \file Serial.cpp
  * \brief USART API.
- * \author R�mi.Debord
+ * \author Rémi.Debord
  * \version 1.0
  * \date 07 janvier 2016
  *

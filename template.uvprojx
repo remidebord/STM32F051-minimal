@@ -335,7 +335,7 @@
               <MiscControls>--cpp</MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\inc;.\lib\api\inc;.\lib\cmsis\inc;.\lib\system\inc</IncludePath>
+              <IncludePath>.\inc;.\lib\api\inc;.\lib\cmsis\inc;.\lib\system\inc;.\lib\misc\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -473,6 +473,11 @@
               <FileName>Serial.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\lib\api\src\Serial.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>I2C.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\lib\api\src\I2C.cpp</FilePath>
             </File>
             <File>
               <FileName>Memory.cpp</FileName>
