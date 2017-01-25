@@ -480,6 +480,11 @@
               <FilePath>.\lib\api\src\I2C.cpp</FilePath>
             </File>
             <File>
+              <FileName>SPI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\lib\api\src\SPI.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Memory.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\lib\api\src\Memory.cpp</FilePath>

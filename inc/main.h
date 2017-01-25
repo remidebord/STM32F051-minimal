@@ -12,6 +12,7 @@
 #include "Timer.h"
 #include "Serial.h"
 #include "I2C.h"
+#include "SPI.h"
 #include "Memory.h"
 #include "Power.h"
 #include "Watchdog.h"

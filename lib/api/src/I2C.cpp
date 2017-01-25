@@ -18,8 +18,8 @@ extern "C"
 }
 
 I2C :: I2C(I2C_TypeDef* i2c, PinName sda, PinName scl): m_sda(sda, Pin_AF), m_scl(scl, Pin_AF),
-                                                                            m_circularRx(&m_bufferRx[0], I2C_BUFFER_SIZE),
-                                                                            m_circularTx(&m_bufferTx[0], I2C_BUFFER_SIZE)
+                                                        m_circularRx(&m_bufferRx[0], I2C_BUFFER_SIZE),
+                                                        m_circularTx(&m_bufferTx[0], I2C_BUFFER_SIZE)
 {
 	uint32_t tmp = 0;
 	uint8_t index = 0;
