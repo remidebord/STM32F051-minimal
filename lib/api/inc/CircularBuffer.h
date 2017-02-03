@@ -21,6 +21,7 @@ class CircularBuffer
 		CircularBuffer(uint8_t* buffer, uint16_t size);
 		
 		uint16_t count(void);
+		void flush(void);
 		void put(uint8_t c);
 		uint8_t get(void);
 };

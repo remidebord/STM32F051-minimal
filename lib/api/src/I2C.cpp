@@ -73,6 +73,7 @@ I2C :: I2C(I2C_TypeDef* i2c, PinName sda, PinName scl): m_sda(sda, Pin_AF), m_sc
 	m_i2c->CR1 |= I2C_CR1_TCIE;   // Transfer complete
 	m_i2c->CR1 |= I2C_CR1_STOPIE;	// STOP detection
 	m_i2c->CR1 |= I2C_CR1_NACKIE;	// Not acknowledge received
+	m_i2c->CR1 |= I2C_CR1_ERRIE;
 
 	// NVIC configuration
 	if(i2c == I2C1) irq = I2C1_IRQn;
@@ -155,6 +156,16 @@ uint8_t I2C :: write(uint8_t address, uint8_t* buffer, uint8_t length)
 	return result;
 }
 
+void I2C :: read_b(uint8_t address, uint8_t* buffer, uint8_t length)
+{
+	while(this->read(address, buffer, length) == 0); 
+}
+
+void I2C :: write_b(uint8_t address, uint8_t* buffer, uint8_t length)
+{
+	while(this->write(address, buffer, length) == 0); 
+}
+
 uint8_t I2C :: busy(void)
 {
 	uint8_t result = 0;
@@ -170,7 +181,9 @@ uint8_t I2C :: busy(void)
 extern "C"
 {	
 	void I2C1_IRQHandler(void)
-	{		
+	{
+		uint32_t tmp = 0;
+		
 		// Transmit complete
 		if((I2C1->ISR & I2C_ISR_TC) != 0)
 		{
@@ -197,22 +210,39 @@ extern "C"
 			}
 		}
 		
-		// NACK error
-		if((I2C1->ISR & I2C_ISR_NACKF) != 0)
-		{
-			I2C1->ICR |= I2C_ICR_NACKCF;
-		}
-		
 		// STOP generated
 		if((I2C1->ISR & I2C_ISR_STOPF) != 0)
 		{
 			I2C1->ICR |= I2C_ICR_STOPCF;
 			I2C1->CR2 = 0;
 		}
+		
+		// Errors
+		if((I2C1->ISR & I2C_ISR_NACKF) != 0) tmp |= I2C_ICR_NACKCF;
+		if((I2C1->ISR & I2C_ISR_BERR) != 0) tmp |= I2C_ISR_BERR;
+		if((I2C1->ISR & I2C_ISR_ARLO) != 0) tmp |= I2C_ISR_ARLO;
+		if((I2C1->ISR & I2C_ISR_OVR) != 0) tmp |= I2C_ISR_OVR;
+		if((I2C1->ISR & I2C_ISR_PECERR) != 0) tmp |= I2C_ISR_PECERR;
+		if((I2C1->ISR & I2C_ISR_TIMEOUT) != 0) tmp |= I2C_ISR_TIMEOUT;
+		if((I2C1->ISR & I2C_ISR_ALERT) != 0) tmp |= I2C_ISR_ALERT;
+		
+		if(tmp != 0)
+		{
+			I2C1->ICR |= tmp;
+			
+			if(bufferRx[0] != 0)
+			{
+				bufferRx[0]->flush();
+			}
+			
+			I2C1->CR2 = 0;			
+		}
 	}
 	
 	void I2C2_IRQHandler(void)
-	{		
+	{
+		uint32_t tmp = 0;
+		
 		// Transmit complete
 		if((I2C2->ISR & I2C_ISR_TC) != 0)
 		{
@@ -239,17 +269,32 @@ extern "C"
 			}
 		}
 		
-		// NACK error
-		if((I2C2->ISR & I2C_ISR_NACKF) != 0)
-		{
-			I2C2->ICR |= I2C_ICR_NACKCF;
-		}
-		
 		// STOP generated
 		if((I2C2->ISR & I2C_ISR_STOPF) != 0)
-		{
+		{			
 			I2C2->ICR |= I2C_ICR_STOPCF;
 			I2C2->CR2 = 0;
+		}
+		
+		// Errors
+		if((I2C2->ISR & I2C_ISR_NACKF) != 0) tmp |= I2C_ICR_NACKCF;
+		if((I2C2->ISR & I2C_ISR_BERR) != 0) tmp |= I2C_ISR_BERR;
+		if((I2C2->ISR & I2C_ISR_ARLO) != 0) tmp |= I2C_ISR_ARLO;
+		if((I2C2->ISR & I2C_ISR_OVR) != 0) tmp |= I2C_ISR_OVR;
+		if((I2C2->ISR & I2C_ISR_PECERR) != 0) tmp |= I2C_ISR_PECERR;
+		if((I2C2->ISR & I2C_ISR_TIMEOUT) != 0) tmp |= I2C_ISR_TIMEOUT;
+		if((I2C2->ISR & I2C_ISR_ALERT) != 0) tmp |= I2C_ISR_ALERT;
+		
+		if(tmp != 0)
+		{
+			I2C2->ICR |= tmp;
+			
+			if(bufferRx[1] != 0)
+			{
+				bufferRx[1]->flush();
+			}
+			
+			I2C2->CR2 = 0;			
 		}
 	}
 }

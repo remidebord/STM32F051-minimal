@@ -26,6 +26,13 @@ uint16_t CircularBuffer :: count(void)
 	return m_count;
 }
 
+void CircularBuffer :: flush(void)
+{
+	m_read = 0;
+	m_write = 0;
+	m_count = 0;
+}
+
 void CircularBuffer :: put(uint8_t c)
 {
 	// Don't overwrite data not yet read !
